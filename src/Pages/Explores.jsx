@@ -1,6 +1,6 @@
 import React from "react";
 
-const Explore = () => {
+const Explores = () => {
   const profiles = [
     {
       name: "Sophia, 24",
@@ -56,4 +56,4 @@ const Explore = () => {
   );
 };
 
-export default Explore;
+export default Explores;
