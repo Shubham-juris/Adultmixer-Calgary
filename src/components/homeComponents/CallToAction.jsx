@@ -1,6 +1,11 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const CallToAction = () => {
+  const navigate = useNavigate();
+  const handleclick = () => {
+navigate("/contact")
+  }
   return (
     <>
       {/* Call to Action */}
@@ -12,7 +17,7 @@ const CallToAction = () => {
           Join Adultmixer Calgary today & explore amazing connections waiting
           for you.
         </p>
-        <button className="px-8 py-3 bg-pink-600 text-white rounded-xl text-lg font-semibold hover:bg-pink-700 transition">
+        <button onClick={handleclick} className="px-8 py-3 bg-pink-600 text-white rounded-xl text-lg font-semibold hover:bg-pink-700 transition">
           Join Now
         </button>
       </section>

@@ -5,6 +5,8 @@ import Contact from "../Pages/Contact";
 
 import Matches from "../Pages/Matches";
 import Explores from "../Pages/Explores";
+import SignUp from "../Pages/SignUp";
+import Login from "../Pages/Login";
 const AppRoutes = () => {
   return (
     <Routes>
@@ -12,6 +14,8 @@ const AppRoutes = () => {
       <Route path="/contact" element={<Contact />} />
       <Route path="/explore" element={<Explores />} />
       <Route path="/matches" element={<Matches />} />
+      <Route path="/signup" element={<SignUp />} />
+      <Route path="/login" element={<Login />} />
     </Routes>
   );
 };
