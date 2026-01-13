@@ -31,8 +31,6 @@ const Login = () => {
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-gray-50 px-4">
       <div className="w-full max-w-md bg-white rounded-3xl shadow-xl p-8">
-
-        {/* Heading */}
         <h2 className="text-3xl font-bold text-center text-pink-600 mb-2">
           Welcome Back
         </h2>
@@ -40,17 +38,13 @@ const Login = () => {
           Login to Adultmixer Calgary ❤️
         </p>
 
-        {/* Error */}
         {error && (
           <p className="bg-red-100 text-red-600 text-sm p-3 rounded-lg mb-4 text-center">
             {error}
           </p>
         )}
 
-        {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-5">
-
-          {/* Email */}
           <div>
             <label className="block text-gray-700 font-semibold mb-1">
               Email Address
@@ -65,7 +59,6 @@ const Login = () => {
             />
           </div>
 
-          {/* Password */}
           <div>
             <label className="block text-gray-700 font-semibold mb-1">
               Password
@@ -88,14 +81,12 @@ const Login = () => {
             </div>
           </div>
 
-          {/* Forgot Password */}
           <div className="text-right">
             <span className="text-sm text-pink-600 cursor-pointer hover:underline">
               Forgot Password?
             </span>
           </div>
 
-          {/* Submit */}
           <button
             type="submit"
             className="w-full py-3 bg-pink-600 text-white text-lg font-bold rounded-xl hover:bg-pink-700 transition"
@@ -104,7 +95,6 @@ const Login = () => {
           </button>
         </form>
 
-        {/* Signup Link */}
         <p className="text-center text-sm text-gray-600 mt-6">
           Don’t have an account?{" "}
           <Link to="/signup" className="text-pink-600 font-semibold">
