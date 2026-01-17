@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Heart, X, Users } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
-/* ================= PROFILE DATA ================= */
 
 const allProfiles = [
   /* ================= WOMEN ================= */
@@ -89,10 +88,16 @@ const Explore = () => {
     setProfiles(profiles.filter((p) => p.id !== id));
   };
 
-  const handleLike = (profile) => {
-    setLiked([...liked, profile]);
-    setProfiles(profiles.filter((p) => p.id !== profile.id));
-  };
+const handleLike = (profile) => {
+  if (liked.includes(profile.id)) {
+    // Unlike
+    setLiked(liked.filter((id) => id !== profile.id));
+  } else {
+    // Like
+    setLiked([...liked, profile.id]);
+  }
+};
+
 
   /* ================= AGE POPUP ================= */
   if (isAdult === false) {
@@ -126,7 +131,6 @@ const Explore = () => {
     );
   }
 
-  /* ================= MAIN PAGE ================= */
   return (
     <div className="min-h-screen bg-gradient-to-b from-pink-50 to-white pt-28 px-6">
       {/* HEADER */}
@@ -187,12 +191,24 @@ const Explore = () => {
                   >
                     <X /> Skip
                   </button>
-                  <button
-                    onClick={() => handleLike(user)}
-                    className="flex-1 py-3 rounded-xl bg-pink-600 text-white flex justify-center items-center gap-2 hover:bg-pink-700"
-                  >
-                    <Heart /> Like
-                  </button>
+            <button
+  onClick={() => handleLike(user)}
+  className={`flex-1 py-3 rounded-xl flex justify-center items-center gap-2 font-semibold transition
+    ${
+      liked.includes(user.id)
+        ? "bg-red-100 text-red-600"
+        : "bg-white border text-gray-600 hover:bg-gray-100"
+    }
+  `}
+>
+  <Heart
+    className={`${
+      liked.includes(user.id) ? "fill-red-500 text-red-500" : "text-gray-400"
+    }`}
+  />
+  {liked.includes(user.id) ? "Liked" : "Like"}
+</button>
+
                 </div>
               </div>
             </div>
