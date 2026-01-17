@@ -3,15 +3,17 @@ import React from "react";
 const ContactHeader = () => {
   return (
     <>
-      {/* Contact Header */}
-      <section className="pt-28 pb-10 text-center px-6">
-        <h1 className="text-4xl md:text-5xl font-extrabold text-pink-600 drop-shadow">
-          Contact Us
-        </h1>
-        <p className="text-gray-600 max-w-2xl mx-auto mt-3 text-lg">
-          We’re here to help! Reach out for support, questions, or
-          collaborations.
-        </p>
+    {/* ================= HEADER ================= */}
+      <section className="bg-gradient-to-r from-pink-600 to-rose-500 text-white py-40">
+        <div className="max-w-7xl mx-auto px-6 text-center">
+          <h1 className="text-4xl md:text-5xl font-bold">
+            Contact AdultMixer Calgary
+          </h1>
+          <p className="mt-6 text-lg text-pink-100">
+            We’re here to help. Whether you have questions, feedback, or safety
+            concerns, our support team is always ready to assist you.
+          </p>
+        </div>
       </section>
     </>
   );

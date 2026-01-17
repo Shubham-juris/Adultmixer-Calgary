@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
-
+import { Link, Links } from "react-router-dom";
 const SignUp = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -19,7 +19,12 @@ const SignUp = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!formData.name || !formData.email || !formData.password || !formData.age) {
+    if (
+      !formData.name ||
+      !formData.email ||
+      !formData.password ||
+      !formData.age
+    ) {
       setError("All fields are required");
       return;
     }
@@ -35,9 +40,8 @@ const SignUp = () => {
   };
 
   return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-gray-50 px-4">
+    <div className="min-h-screen w-full flex items-center justify-center bg-gray-50 px-4 py-25">
       <div className="w-full max-w-md bg-white rounded-3xl shadow-xl p-8">
-        
         <h2 className="text-3xl font-bold text-center text-pink-600 mb-2">
           Create Account
         </h2>
@@ -53,7 +57,6 @@ const SignUp = () => {
         )}
 
         <form onSubmit={handleSubmit} className="space-y-5">
-          
           {/* Full Name */}
           <div>
             <label className="block text-gray-700 font-semibold mb-1">
@@ -133,11 +136,10 @@ const SignUp = () => {
 
         <p className="text-center text-sm text-gray-600 mt-6">
           Already have an account?{" "}
-          <span className="text-pink-600 font-semibold cursor-pointer">
+          <Link to="/login" className="text-pink-600 font-semibold cursor-pointer">
             Login
-          </span>
+          </Link>
         </p>
-
       </div>
     </div>
   );

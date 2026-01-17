@@ -8,8 +8,7 @@ const Home = () => {
     <div className="w-full min-h-screen bg-gray-50">
       <HeroSection />
       <FeaturesSection />
-      <CallToAction />
-
+      {/* <CallToAction /> */}
     </div>
   );
 };

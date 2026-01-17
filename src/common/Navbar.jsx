@@ -1,22 +1,28 @@
 import React, { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Link, NavLink } from "react-router-dom";
+import logo from "../assets/logo/logo4Navbar.png";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
 
   const linkClass = ({ isActive }) =>
-    `transition ${
-      isActive ? "text-pink-600 font-semibold" : "text-gray-700 hover:text-pink-600"
+    `transition duration-300 ${
+      isActive
+        ? "text-pink-600 font-semibold"
+        : "text-gray-700 hover:text-pink-600"
     }`;
 
   return (
     <nav className="w-full bg-white shadow-md fixed top-0 left-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-        
+      <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
         {/* Logo */}
-        <Link to="/" className="text-2xl font-bold text-pink-600 tracking-wide">
-          Adultmixer <span className="text-gray-800">Calgary</span>
+        <Link to="/" className="flex items-center">
+          <img
+            src={logo}
+            alt="AdultMixer Logo"
+            className="h-16 md:h-18 w-auto object-contain"
+          />
         </Link>
 
         {/* Desktop Menu */}
@@ -39,45 +45,90 @@ const Navbar = () => {
         <div className="hidden md:flex space-x-4">
           <Link
             to="/login"
-            className="px-4 py-2 rounded-xl bg-gray-200 hover:bg-gray-300 transition"
+            className="px-5 py-2 rounded-xl bg-gray-200 hover:bg-gray-300 transition"
           >
             Login
           </Link>
           <Link
             to="/signup"
-            className="px-4 py-2 rounded-xl bg-pink-600 text-white hover:bg-pink-700 transition"
+            className="px-5 py-2 rounded-xl bg-pink-600 text-white hover:bg-pink-700 transition"
           >
             Sign Up
           </Link>
         </div>
 
         {/* Mobile Menu Button */}
-        <button className="md:hidden" onClick={() => setOpen(!open)}>
-          {open ? <X size={28} /> : <Menu size={28} />}
+        <button
+          className="md:hidden text-gray-800"
+          onClick={() => setOpen(!open)}
+        >
+          {open ? <X size={30} /> : <Menu size={30} />}
         </button>
       </div>
 
       {/* Mobile Dropdown */}
       {open && (
-        <div className="md:hidden bg-white shadow-lg p-4 space-y-4 text-lg font-medium">
-          
-          <NavLink to="/" className={linkClass} onClick={() => setOpen(false)}>
+        <div className="md:hidden bg-white shadow-lg px-6 py-5 space-y-3 text-lg font-medium">
+          <NavLink
+            to="/"
+            onClick={() => setOpen(false)}
+            className={({ isActive }) =>
+              `block w-full px-3 py-2 rounded-lg ${
+                isActive
+                  ? "text-pink-600 font-semibold"
+                  : "text-gray-700 hover:text-pink-600"
+              }`
+            }
+          >
             Home
           </NavLink>
-          <NavLink to="/explore" className={linkClass} onClick={() => setOpen(false)}>
+
+          <NavLink
+            to="/explore"
+            onClick={() => setOpen(false)}
+            className={({ isActive }) =>
+              `block w-full px-3 py-2 rounded-lg ${
+                isActive
+                  ? "text-pink-600 font-semibold"
+                  : "text-gray-700 hover:text-pink-600"
+              }`
+            }
+          >
             Explore
           </NavLink>
-          <NavLink to="/matches" className={linkClass} onClick={() => setOpen(false)}>
+
+          <NavLink
+            to="/matches"
+            onClick={() => setOpen(false)}
+            className={({ isActive }) =>
+              `block w-full px-3 py-2 rounded-lg ${
+                isActive
+                  ? "text-pink-600 font-semibold"
+                  : "text-gray-700 hover:text-pink-600"
+              }`
+            }
+          >
             Matches
           </NavLink>
-          <NavLink to="/contact" className={linkClass} onClick={() => setOpen(false)}>
+
+          <NavLink
+            to="/contact"
+            onClick={() => setOpen(false)}
+            className={({ isActive }) =>
+              `block w-full px-3 py-2 rounded-lg ${
+                isActive
+                  ? "text-pink-600 font-semibold"
+                  : "text-gray-700 hover:text-pink-600"
+              }`
+            }
+          >
             Contact
           </NavLink>
 
           <Link
             to="/login"
             onClick={() => setOpen(false)}
-            className="block w-full text-center px-4 py-2 rounded-xl bg-gray-200 hover:bg-gray-300 transition"
+            className="block w-full text-center px-4 py-2 mt-2 rounded-xl bg-gray-200 hover:bg-gray-300 transition"
           >
             Login
           </Link>

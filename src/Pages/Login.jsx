@@ -29,7 +29,7 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-gray-50 px-4">
+    <div className="min-h-screen w-full flex items-center justify-center bg-gray-50 px-4 py-25">
       <div className="w-full max-w-md bg-white rounded-3xl shadow-xl p-8">
         <h2 className="text-3xl font-bold text-center text-pink-600 mb-2">
           Welcome Back
@@ -81,11 +81,7 @@ const Login = () => {
             </div>
           </div>
 
-          <div className="text-right">
-            <span className="text-sm text-pink-600 cursor-pointer hover:underline">
-              Forgot Password?
-            </span>
-          </div>
+         
 
           <button
             type="submit"

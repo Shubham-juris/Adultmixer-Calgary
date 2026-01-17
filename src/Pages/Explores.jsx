@@ -1,59 +1,219 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { Heart, X, Users } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
-const Explores = () => {
-  const profiles = [
-    {
-      name: "Sophia, 24",
-      img: "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg",
-      bio: "Love traveling, music & late-night conversations ❤️",
-    },
-    {
-      name: "Daniel, 27",
-      img: "https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg",
-      bio: "Gym lover • Foodie • Looking for real connections",
-    },
-    {
-      name: "Emily, 22",
-      img: "https://images.pexels.com/photos/3777948/pexels-photo-3777948.jpeg",
-      bio: "Artist 🎨 | Introvert | Coffee always!",
-    },
-  ];
+/* ================= PROFILE DATA ================= */
 
+const allProfiles = [
+  /* ================= WOMEN ================= */
+  { id: 1, name: "Sophia", age: 24, gender: "woman", img: "https://i.pravatar.cc/400?img=44", bio: "Love deep conversations & romantic evenings." },
+  { id: 2, name: "Emily", age: 23, gender: "woman", img: "https://i.pravatar.cc/400?img=48", bio: "Creative soul 🎨 | Coffee over clubs." },
+  { id: 3, name: "Olivia", age: 26, gender: "woman", img: "https://i.pravatar.cc/400?img=49", bio: "Travel addict ✈️ | Sunset lover." },
+  { id: 4, name: "Ava", age: 25, gender: "woman", img: "https://i.pravatar.cc/400?img=47", bio: "Positive vibes only 🌸" },
+  { id: 5, name: "Mia", age: 22, gender: "woman", img: "https://i.pravatar.cc/400?img=32", bio: "Introvert but fun once comfortable." },
+  { id: 6, name: "Charlotte", age: 27, gender: "woman", img: "https://i.pravatar.cc/400?img=10", bio: "Looking for real chemistry 💕" },
+  { id: 7, name: "Amelia", age: 29, gender: "woman", img: "https://i.pravatar.cc/400?img=16", bio: "Wine, music & good talks." },
+  { id: 8, name: "Harper", age: 24, gender: "woman", img: "https://i.pravatar.cc/400?img=19", bio: "Nature lover 🌿" },
+  { id: 9, name: "Ella", age: 26, gender: "woman", img: "https://i.pravatar.cc/400?img=20", bio: "Soft heart, strong mind." },
+  { id: 10, name: "Grace", age: 28, gender: "woman", img: "https://i.pravatar.cc/400?img=21", bio: "Meaningful connections only." },
+  { id: 11, name: "Lily", age: 21, gender: "woman", img: "https://i.pravatar.cc/400?img=22", bio: "Young, wild & honest." },
+  { id: 12, name: "Chloe", age: 25, gender: "woman", img: "https://i.pravatar.cc/400?img=23", bio: "Late-night talks hit different." },
+
+  /* ================= MEN ================= */
+  { id: 16, name: "Daniel", age: 28, gender: "man", img: "https://i.pravatar.cc/400?img=14", bio: "Fitness lover • Honest vibes." },
+  { id: 17, name: "Ryan", age: 30, gender: "man", img: "https://i.pravatar.cc/400?img=12", bio: "Entrepreneur mindset." },
+  { id: 18, name: "Ethan", age: 26, gender: "man", img: "https://i.pravatar.cc/400?img=11", bio: "Gym, grind & growth." },
+  { id: 19, name: "Noah", age: 24, gender: "man", img: "https://i.pravatar.cc/400?img=56", bio: "Calm energy, real talks." },
+  { id: 20, name: "Liam", age: 27, gender: "man", img: "https://i.pravatar.cc/400?img=13", bio: "Looking for something meaningful." },
+  { id: 21, name: "Lucas", age: 29, gender: "man", img: "https://i.pravatar.cc/400?img=8", bio: "Driven & focused." },
+  { id: 22, name: "Mason", age: 31, gender: "man", img: "https://i.pravatar.cc/400?img=57", bio: "Good vibes only 😌" },
+  { id: 23, name: "Logan", age: 25, gender: "man", img: "https://i.pravatar.cc/400?img=58", bio: "Music & midnight drives." },
+  { id: 24, name: "Jacob", age: 25, gender: "man", img: "https://i.pravatar.cc/400?img=59", bio: "Simple man, deep emotions." },
+  { id: 25, name: "Aiden", age: 23, gender: "man", img: "https://i.pravatar.cc/400?img=51", bio: "Let’s see where it goes." },
+  { id: 26, name: "Henry", age: 32, gender: "man", img: "https://i.pravatar.cc/400?img=52", bio: "Mature & respectful." },
+  { id: 27, name: "Leo", age: 26, gender: "man", img: "https://i.pravatar.cc/400?img=53", bio: "Adventure seeker 🌍" },
+  { id: 28, name: "Jack", age: 29, gender: "man", img: "https://i.pravatar.cc/400?img=54", bio: "Looking for sparks ✨" },
+  { id: 29, name: "Owen", age: 27, gender: "man", img: "https://i.pravatar.cc/400?img=55", bio: "Calm, caring & honest." },
+  { id: 30, name: "Theo", age: 24, gender: "man", img: "https://i.pravatar.cc/400?img=56", bio: "Young heart, old soul." },
+
+  /* ================= EVERYONE ================= */
+  { id: 31, name: "Alex", age: 26, gender: "everyone", img: "https://i.pravatar.cc/400?img=60", bio: "Open-minded & friendly." },
+  { id: 32, name: "Taylor", age: 28, gender: "everyone", img: "https://i.pravatar.cc/400?img=61", bio: "Let’s connect naturally." },
+  { id: 33, name: "Jordan", age: 25, gender: "everyone", img: "https://i.pravatar.cc/400?img=62", bio: "Energy matters ✨" },
+  { id: 34, name: "Casey", age: 70, gender: "everyone", img: "https://i.pravatar.cc/400?img=63", bio: "Good conversations win." },
+  { id: 35, name: "Morgan", age: 49, gender: "everyone", img: "https://i.pravatar.cc/400?img=64", bio: "Respect & honesty first." },
+  { id: 36, name: "Riley", age: 57, gender: "everyone", img: "https://i.pravatar.cc/400?img=65", bio: "Looking for real vibes." },
+  { id: 37, name: "George", age: 71, gender: "everyone", img: "https://i.pravatar.cc/400?img=66", bio: "No drama, just connection." },
+  { id: 38, name: "Parker", age: 26, gender: "everyone", img: "https://i.pravatar.cc/400?img=67", bio: "Fun, chill & real." },
+  { id: 39, name: "Avery", age: 22, gender: "everyone", img: "https://i.pravatar.cc/400?img=68", bio: "Still exploring life 🌱" },
+  { id: 40, name: "Skyler", age: 55, gender: "everyone", img: "https://i.pravatar.cc/400?img=69", bio: "Let’s talk & see." },
+  { id: 41, name: "Jamie", age: 80, gender: "everyone", img: "https://i.pravatar.cc/400?img=70", bio: "Emotionally available." },
+];
+
+
+
+
+const Explore = () => {
+  const navigate = useNavigate();
+
+  /* ================= STATES ================= */
+  const [isAdult, setIsAdult] = useState(null);
+  const [filter, setFilter] = useState("everyone");
+  const [profiles, setProfiles] = useState(allProfiles);
+  const [liked, setLiked] = useState([]);
+
+  /* ================= AGE CHECK ================= */
+  useEffect(() => {
+    const verified = localStorage.getItem("adultVerified");
+    if (verified === "true") setIsAdult(true);
+    else setIsAdult(false);
+  }, []);
+
+  const handleAgeYes = () => {
+    localStorage.setItem("adultVerified", "true");
+    setIsAdult(true);
+  };
+
+  const handleAgeNo = () => {
+    navigate("/");
+  };
+
+  /* ================= FILTER LOGIC ================= */
+  const filteredProfiles =
+    filter === "everyone"
+      ? profiles
+      : profiles.filter((p) => p.gender === filter);
+
+  /* ================= ACTIONS ================= */
+  const handleSkip = (id) => {
+    setProfiles(profiles.filter((p) => p.id !== id));
+  };
+
+  const handleLike = (profile) => {
+    setLiked([...liked, profile]);
+    setProfiles(profiles.filter((p) => p.id !== profile.id));
+  };
+
+  /* ================= AGE POPUP ================= */
+  if (isAdult === false) {
+    return (
+      <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
+        <div className="bg-white rounded-3xl p-10 max-w-md text-center shadow-2xl">
+          <h2 className="text-3xl font-bold text-pink-600">
+            18+ Age Verification
+          </h2>
+          <p className="text-gray-600 mt-4">
+            This website contains adult content. You must be at least 18 years
+            old to continue.
+          </p>
+
+          <div className="mt-8 flex gap-4">
+            <button
+              onClick={handleAgeNo}
+              className="flex-1 py-3 rounded-xl border hover:bg-gray-100"
+            >
+              No
+            </button>
+            <button
+              onClick={handleAgeYes}
+              className="flex-1 py-3 rounded-xl bg-pink-600 text-white hover:bg-pink-700"
+            >
+              Yes, I’m 18+
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  /* ================= MAIN PAGE ================= */
   return (
     <div className="min-h-screen bg-gradient-to-b from-pink-50 to-white pt-28 px-6">
-      <h1 className="text-3xl md:text-4xl font-bold text-center text-pink-600 mb-8">
-        Explore Profiles
-      </h1>
+      {/* HEADER */}
+      <div className="text-center mb-14">
+        <h1 className="text-4xl md:text-5xl font-bold text-pink-600">
+          Explore Matches
+        </h1>
+        <p className="mt-4 text-gray-600 max-w-2xl mx-auto">
+          Discover real adults nearby. Filter by preference and connect with
+          confidence.
+        </p>
+      </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-        {profiles.map((user, index) => (
-          <div
-            key={index}
-            className="bg-white shadow-lg rounded-2xl overflow-hidden hover:scale-105 transition transform"
+      {/* FILTER BUTTONS */}
+      <div className="flex justify-center gap-4 mb-12 flex-wrap">
+        {["everyone", "man", "woman"].map((type) => (
+          <button
+            key={type}
+            onClick={() => setFilter(type)}
+            className={`px-6 py-3 rounded-full font-semibold transition ${
+              filter === type
+                ? "bg-pink-600 text-white"
+                : "bg-white border hover:bg-gray-100"
+            }`}
           >
-            <img
-              src={user.img}
-              className="w-full h-64 object-cover"
-              alt={user.name}
-            />
-            <div className="p-5">
-              <h2 className="text-xl font-bold text-gray-800">{user.name}</h2>
-              <p className="text-gray-600 mt-1">{user.bio}</p>
-
-              <div className="mt-4 flex space-x-4">
-                <button className="flex-1 py-2 rounded-xl border border-gray-300 hover:bg-gray-100">
-                  Skip
-                </button>
-                <button className="flex-1 py-2 rounded-xl bg-pink-600 text-white hover:bg-pink-700">
-                  Like ❤️
-                </button>
-              </div>
-            </div>
-          </div>
+            {type === "everyone" && "Everyone"}
+            {type === "man" && "Men"}
+            {type === "woman" && "Women"}
+          </button>
         ))}
       </div>
+
+      {/* PROFILES */}
+      {filteredProfiles.length > 0 ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto">
+          {filteredProfiles.map((user) => (
+            <div
+              key={user.id}
+              className="bg-white rounded-3xl shadow-lg overflow-hidden hover:-translate-y-1 transition"
+            >
+              <img
+                src={user.img}
+                alt={user.name}
+                loading="lazy"
+                className="w-full h-72 object-cover"
+              />
+
+              <div className="p-6">
+                <h2 className="text-2xl font-bold">
+                  {user.name}, {user.age}
+                </h2>
+                <p className="text-gray-600 mt-2">{user.bio}</p>
+
+                <div className="mt-6 flex gap-4">
+                  <button
+                    onClick={() => handleSkip(user.id)}
+                    className="flex-1 py-3 rounded-xl border flex justify-center items-center gap-2 hover:bg-gray-100"
+                  >
+                    <X /> Skip
+                  </button>
+                  <button
+                    onClick={() => handleLike(user)}
+                    className="flex-1 py-3 rounded-xl bg-pink-600 text-white flex justify-center items-center gap-2 hover:bg-pink-700"
+                  >
+                    <Heart /> Like
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="text-center mt-20 text-gray-500">
+          <Users size={48} className="mx-auto mb-4" />
+          <h2 className="text-2xl font-bold">No profiles available</h2>
+          <p>Try changing filters or come back later.</p>
+        </div>
+      )}
+
+      {/* LIKED COUNTER */}
+      {liked.length > 0 && (
+        <div className="fixed bottom-6 right-6 bg-pink-600 text-white px-6 py-3 rounded-full shadow-lg">
+          ❤️ Liked: {liked.length}
+        </div>
+      )}
     </div>
   );
 };
 
-export default Explores;
+export default Explore;
