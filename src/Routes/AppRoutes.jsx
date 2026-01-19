@@ -9,19 +9,23 @@ import SignUp from "../Pages/SignUp";
 import Login from "../Pages/Login";
 import Profile from "../Pages/Profile";
 import Chat from "../Pages/Chat";
+import TopToScroll from "../Pages/TopToScroll";
 
 const AppRoutes = () => {
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/contact" element={<Contact />} />
-      <Route path="/explore" element={<Explores />} />
-      <Route path="/matches" element={<Matches />} />
-      <Route path="/signup" element={<SignUp />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/profile/:id" element={<Profile />} />
-      <Route path="/chat/:id" element={<Chat />} />
-    </Routes>
+    <>
+      <TopToScroll />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/explore" element={<Explores />} />
+        <Route path="/matches" element={<Matches />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/profile/:id" element={<Profile />} />
+        <Route path="/chat/:id" element={<Chat />} />
+      </Routes>
+    </>
   );
 };
 
